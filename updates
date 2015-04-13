@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rm ~/motd_updates || true
+touch ~/motd_updates || true
+
+echo `zypper -q lp | tail -n+4 | wc -l` Patches pending. > ~/motd_updates
+
+echo `zypper -q lu | tail -n+3 | wc -l` Updates pending. >> ~/motd_updates 
+
