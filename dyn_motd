@@ -1,0 +1,28 @@
+#!/bin/sh
+clear
+PROCCOUNT=`ps -l | wc -l`
+PROCCOUNT=`expr $PROCCOUNT - 4`
+user='username'
+
+
+echo -e "
+ _  _  _  ______ _______ _______  ______ _    _
+ |  |  | |  ____ |______ |______ |_____/  \  /
+ |__|__| |_____| ______| |______ |    \_   \/
+                                  .eu
+
++++++++++++++++++: System Data :+++++++++++++++++++
++ Hostname = `hostname`
++ Address = `ip a | grep eth2 | awk '{print $2}' | tail -n 1`
++ Kernel = `uname -r`
++ Uptime = `uptime | tr "," "\n" | head -n 1`
++ CPU =  `cat /proc/cpuinfo  | grep model | tail -n 1 | cut -c 14-`
++ Memory = `cat /proc/meminfo | grep MemTotal | awk {'print $2'}` kB
+++++++++++++++++++: User Data :++++++++++++++++++++
++ Username = `whoami`
++ Sessions = `who | grep $USER | wc -l` of $ENDSESSION MAX
++ Processes = $PROCCOUNT
++++++++++++: Maintenance Information :+++++++++++++
++ `cat /home/$user/motd_updates`
++++++++++++++++++++++++++++++++++++++++++++++++++++
+"
